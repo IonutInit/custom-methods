@@ -1,0 +1,35 @@
+{
+  "name": "custom-methods",
+  "version": "0.0.1",
+  "description": "A collection of methods I kept seeing myself using, so I decided to arrange them in a package.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup index.ts --format cjs,esm --dts",
+    "ts": "tsc -w ./src",
+    "test": "jest",
+    "lint": "tsc",
+    "format": "prettier --write . "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IonutInit/custom-methods"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Ionut Cojocaru",
+    "url": "https://i-co.xyz"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-env": "^7.23.2",
+    "@changesets/cli": "^2.26.2",
+    "@types/jest": "^29.5.6",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.3",
+    "ts-jest": "^29.1.1",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  }
+}
