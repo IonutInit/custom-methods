@@ -1,13 +1,13 @@
 {
-  "name": "custom-methods",
-  "version": "0.0.1",
-  "description": "A collection of methods I kept seeing myself using, so I decided to arrange them in a package.",
+  "name": "@ionutinit/custom-methods",
+  "version": "0.1.0",
+  "description": "A collection of methods I keep seeing myself using, so I decided to optimize them and put them in a package.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsup index.ts --format cjs,esm --dts",
-    "ts": "tsc -w ./src",
+    "ts": "tsc -w",
     "test": "jest",
     "lint": "tsc",
     "format": "prettier --write . "
