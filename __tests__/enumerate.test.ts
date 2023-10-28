@@ -3,7 +3,7 @@ import testIt from "../testIt";
 
 import { enumerateError } from "../constants/errorMessages";
 
-const { err_StrArr, err_Unique, err_LimitTail } = enumerateError;
+const { err_StrArr, err_Unique, err_LimitTail, warn_Tail } = enumerateError;
 
 const errors = [
   [[5], err_StrArr],
@@ -156,6 +156,11 @@ const testUnique: any[] = [
   ],
 ];
 
+const warnTest = [
+  [[["one", "two", "three"], { limit: 2, tail: 1 }], warn_Tail],
+  [[["one", "two", "three", "four", "five"], { limit: 3, tail: 2 }], warn_Tail],
+];
+
 testIt(enumerate, errors, {
   type: "error",
   description: "Returns error if not provided an array of strings",
@@ -177,4 +182,9 @@ testIt(enumerate, tailEdges);
 
 testIt(enumerate, testUnique, {
   description: "Returns enumerated unique values of array",
+});
+
+testIt(enumerate, warnTest, {
+  type: "warn",
+  description: "logs warning that the tail is too large",
 });

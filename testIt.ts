@@ -1,4 +1,4 @@
-type TestType = "equal" | "be" | "error";
+type TestType = "equal" | "be" | "error" | "warn" | "hasProperty";
 
 const testIt = (
   func: Function,
@@ -12,12 +12,33 @@ const testIt = (
         !options.type ? (execType = type) : (execType = options.type);
 
         test(!options.description ? description : options.description, () => {
-          if (execType === "error") {
-            expect(() => func(...input)).toThrowError(expected);
-          } else if (execType === "be") {
-            expect(func(...input)).toEqual(expected);
-          } else if (execType === "equal") {
-            expect(func(...input)).toEqual(expected);
+          switch (execType) {
+            case "be":
+              expect(func(...input)).toBe(expected);
+              break;
+
+            case "error":
+              expect(() => func(...input)).toThrowError(expected);
+              break;
+
+            case "equal":
+              expect(func(...input)).toEqual(expected);
+              break;
+
+            case "hasProperty":
+              expect(func(...input)).toHaveProperty(expected);
+
+            case "warn":
+              const warnSpy = jest
+                .spyOn(console, "warn")
+                .mockImplementation(() => {});
+              func(...input);
+              expect(warnSpy).toHaveBeenCalledWith(expected);
+              warnSpy.mockRestore();
+              break;
+
+            default:
+              break;
           }
         });
       }

@@ -1,6 +1,6 @@
 {
   "name": "@ionutinit/custom-methods",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A collection of methods I keep seeing myself using, so I decided to optimize them and put them in a package.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

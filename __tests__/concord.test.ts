@@ -3,25 +3,20 @@ import testIt from "../testIt";
 
 import { concordError } from "../constants/errorMessages";
 
-const {
-  err_NoStringNoNum,
-  err_EmptyString,
-  err_NoNum,
-  err_ThirdParam,
-  err_Round,
-} = concordError;
+const { err_NoStrNoNumOR, err_EmptyStr, err_NoNum, err_ThirdParam, err_Round } =
+  concordError;
 
 const errorCases = [
-  [[null, "item"], err_NoStringNoNum],
-  [[{}, "item"], err_NoStringNoNum],
-  [[5, {}], err_NoStringNoNum],
-  [["0", ""], err_EmptyString],
-  [["", ""], err_EmptyString],
+  [[null, "item"], err_NoStrNoNumOR],
+  [[{}, "item"], err_NoStrNoNumOR],
+  [[5, {}], err_NoStrNoNumOR],
+  [["0", ""], err_EmptyStr],
+  [["", ""], err_EmptyStr],
   [["", "item"], err_NoNum],
   [["", "item", null], err_ThirdParam],
   [["", "item", [""]], err_ThirdParam],
   [["", "item", {}], err_ThirdParam],
-  [[{}, "item", {}], err_NoStringNoNum],
+  [[{}, "item", {}], err_NoStrNoNumOR],
   [[5, "item", {}], err_ThirdParam],
   [[5, "item", { round: 2 }], err_Round],
 ];

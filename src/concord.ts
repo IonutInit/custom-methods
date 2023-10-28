@@ -10,8 +10,8 @@ const concord: Concord = (
   { round = false } = {}
 ) => {
   const {
-    err_NoStringNoNum,
-    err_EmptyString,
+    err_NoStrNoNumOR,
+    err_EmptyStr,
     err_NoNum,
     err_ThirdParam,
     err_Round,
@@ -21,7 +21,7 @@ const concord: Concord = (
     (typeof num !== "number" && typeof num !== "string") ||
     typeof str !== "string"
   ) {
-    throw new Error(err_NoStringNoNum);
+    throw new Error(err_NoStrNoNumOR);
   }
 
   // going a bit off-script to make the presence of the third argument not needed regardless of the rest of parameters
@@ -38,7 +38,7 @@ const concord: Concord = (
   }
 
   if (str.length === 0) {
-    throw new Error(err_EmptyString);
+    throw new Error(err_EmptyStr);
   }
 
   if (typeof num === "string" && num.length === 0) {

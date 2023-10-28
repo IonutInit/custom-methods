@@ -18,8 +18,20 @@ type Enumerate = {
   ): string;
 };
 
+type CapitalizeOption = "sentence" | "word" | "all";
+
 type Capitalize = {
-  (input: string | string[]): string | string[];
+  (
+    input: string | string[],
+    style?: { style?: CapitalizeOption }
+  ): string | string[];
+};
+
+// pipe types
+type Pipe<A, B> = (input: A) => B;
+
+type ReduceText = {
+  (input: string, stop: number, params?: string);
 };
 
 declare const concord: Concord;
@@ -28,4 +40,8 @@ declare const capitalize: Capitalize;
 
 declare const enumerate: Enumerate;
 
-export { capitalize, concord, enumerate };
+declare const pipe: <T, R>(...functions: Pipe<any, any>[]) => Pipe<T, R>;
+
+declare const reduceText: ReduceText;
+
+export { capitalize, concord, enumerate, pipe, reduceText };

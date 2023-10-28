@@ -4,9 +4,44 @@
 
 Offers TypeScript support.
 
-<!-- [!NPM link]() -->
+```bash
+npm i @ionutinit/custom-methods
+```
 
-## Concord
+&nbsp;
+
+## capitalize
+
+Capitalizes the first letter of a string or each element in an array of strings.
+
+```typescript
+capitalize(string | string[]) => string | string[]
+```
+
+### Optional parameters (string only)
+
+When provided a string, an optional style parameter can be invoked to capitalize each word or sentence respectively.
+
+```typescript
+capitalize(string, { style: "word" | "sentence" });
+```
+
+### Examples
+
+```javascript
+capitalize("hello");
+// "Hello"
+capitalize(["good", "day"]);
+// ["Good". "Day"]
+capitalize("hello. how are you?", { style: "word" });
+// "Hello. How Are You?"
+capitalize("hello. how are you?", { style: "sentence" });
+// "Hello. How are you?"
+```
+
+&nbsp;
+
+## concord
 
 Creates grammatical concord (agreement) between a string and an associated number.
 
@@ -55,26 +90,9 @@ concord("5.95", "leaf", "leaves", { round: 1 });
 // "5 leaves"
 ```
 
-## Capitalize
+&nbsp;
 
-Capitalizes the first letter of a string or each element in an array of strings.
-
-```typescript
-capitalize(string | string[]) => string | string[]
-```
-
-### Examples
-
-```javascript
-capitalize("hello");
-// "Hello"
-capitalize(["good", "day"]);
-// ["Good". "Day"]
-capitalize(5);
-// Throws: "The input must be a string or an array of strings"
-```
-
-## Enumerate
+## enumerate
 
 Returns a natural-language enumeration of an array of strings.
 
@@ -123,4 +141,64 @@ enumerate(["one", "one", "two", "two", "three", "three", "four", "four"], {
 // "one... four"
 enumerate(["one", "two", "three", "four"], { limit: 2, tail: 4 });
 // "one, two..."
+```
+
+&nbsp;
+
+## pipe
+
+A simple pipeline function
+
+```typescript
+pipeline( ...args: function) => any
+```
+
+### Example
+
+```javascript
+const increment = (x) => x + 1;
+const double = (x) => x * 2;
+const toString = (x) => x.toString();
+
+const piped = pipe(increment, double, toString);
+piped(2);
+// "6"
+```
+
+&nbsp;
+
+## reduceText
+
+Returns a text reduced to the full word or sentence nearest to the limit provided. The limit refers to the length of the string.
+
+The default characters for the limit are **. ! ?** .
+
+```typescript
+reduceText(string, number) => string
+```
+
+### Optional parameters
+
+```typescript
+reduceText(
+  string,
+  number,
+  params?: string,
+)
+```
+
+**params**: provide customs characters to be considered as the limit; each individual character is taken into consideration separately
+
+### Examples
+
+```javascript
+reduceText("Hello. How are you? I'm fine!", 14);
+// "Hello. How are you?"
+// The limits taken into consideration are 5 (.), 18 (?), 28 (!). Closest to the limit provided is "?", so the string is cut at that point
+reduceText("Hello. How are you? I'm fine!", 7);
+// "Hello."
+reduceText("Hello. How are you? I'm fine!", 1, "?");
+// "Hello. How are you?"
+reduceText("Hello. How are you? I'm fine!", 1, " ");
+// "Hello." -> if a blank space is provided as param, it returns the words up the limit provided
 ```
